@@ -1,0 +1,34 @@
+Practice with link
+
+from i in invoices
+
+
+from i in invoices
+ordergy i.billingstate
+select i
+
+
+from i in invoices
+orderby i.billingstate
+select i
+
+from i in invoices
+orderby i.billing state
+select
+
+from i in invoices
+orderby i.billingtate
+select new {i.billinaddress, i.billingcity}
+
+
+
+select [t0].{BillingAddress], i.BillingCity}
+
+from i in invoices
+orderby i .customerid
+select i
+
+from i in invoices
+orderby i.billingstate
+group i by  i.customerid
+select i
