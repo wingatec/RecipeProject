@@ -1,0 +1,6 @@
+C:\Users\Grand\Documents\GitHub\RecipeProject\RecipeMvc\bin\RecipeMvc.dll.config
+C:\Users\Grand\Documents\GitHub\RecipeProject\RecipeMvc\bin\RecipeMvc.dll
+C:\Users\Grand\Documents\GitHub\RecipeProject\RecipeMvc\bin\RecipeMvc.pdb
+C:\Users\Grand\Documents\GitHub\RecipeProject\RecipeMvc\obj\Debug\RecipeMvc.csprojResolveAssemblyReference.cache
+C:\Users\Grand\Documents\GitHub\RecipeProject\RecipeMvc\obj\Debug\RecipeMvc.dll
+C:\Users\Grand\Documents\GitHub\RecipeProject\RecipeMvc\obj\Debug\RecipeMvc.pdb
