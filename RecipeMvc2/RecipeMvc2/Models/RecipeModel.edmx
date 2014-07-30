@@ -1,0 +1,387 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="RecipeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CookingTime">
+          <Key>
+            <PropertyRef Name="CookingTimeId" />
+          </Key>
+          <Property Name="RecipeId" Type="int" />
+          <Property Name="CookingTime" Type="int" Nullable="false" />
+          <Property Name="CookingTimeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ingredient">
+          <Key>
+            <PropertyRef Name="IngredientId" />
+          </Key>
+          <Property Name="RecipeId" Type="int" />
+          <Property Name="Ingredient" Type="nchar" MaxLength="1000" />
+          <Property Name="IngredientId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PrepTime">
+          <Key>
+            <PropertyRef Name="PrepTimeId" />
+          </Key>
+          <Property Name="PrepTime" Type="int" />
+          <Property Name="PrepTimeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Recipe">
+          <Key>
+            <PropertyRef Name="RecipeId" />
+          </Key>
+          <Property Name="RecipeId" Type="int" Nullable="false" />
+          <Property Name="RecipeName" Type="nchar" MaxLength="1000" />
+          <Property Name="CookingTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Serves" Type="int" />
+          <Property Name="Ingredient" Type="nchar" MaxLength="1000" />
+          <Property Name="CookingTimeId" Type="int" />
+          <Property Name="ServesId" Type="int" />
+          <Property Name="IngredientId" Type="int" />
+        </EntityType>
+        <EntityType Name="Serves">
+          <Key>
+            <PropertyRef Name="ServesId" />
+          </Key>
+          <Property Name="RecipeId" Type="nchar" MaxLength="10" />
+          <Property Name="ServesId" Type="int" Nullable="false" />
+          <Property Name="Serves" Type="int" />
+        </EntityType>
+        <EntityType Name="Steps">
+          <Key>
+            <PropertyRef Name="StepsId" />
+          </Key>
+          <Property Name="StepsId" Type="int" Nullable="false" />
+          <Property Name="Steps" Type="nchar" MaxLength="1000" />
+        </EntityType>
+        <Association Name="FK_Ingredient_Recipe">
+          <End Role="Recipe" Type="Self.Recipe" Multiplicity="1" />
+          <End Role="Ingredient" Type="Self.Ingredient" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Recipe">
+              <PropertyRef Name="RecipeId" />
+            </Principal>
+            <Dependent Role="Ingredient">
+              <PropertyRef Name="IngredientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PrepTime_CookingTime">
+          <End Role="CookingTime" Type="Self.CookingTime" Multiplicity="1" />
+          <End Role="PrepTime" Type="Self.PrepTime" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="CookingTime">
+              <PropertyRef Name="CookingTimeId" />
+            </Principal>
+            <Dependent Role="PrepTime">
+              <PropertyRef Name="PrepTimeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recipe_CookingTime">
+          <End Role="CookingTime" Type="Self.CookingTime" Multiplicity="1" />
+          <End Role="Recipe" Type="Self.Recipe" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="CookingTime">
+              <PropertyRef Name="CookingTimeId" />
+            </Principal>
+            <Dependent Role="Recipe">
+              <PropertyRef Name="RecipeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recipe_Serves">
+          <End Role="Serves" Type="Self.Serves" Multiplicity="1" />
+          <End Role="Recipe" Type="Self.Recipe" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Serves">
+              <PropertyRef Name="ServesId" />
+            </Principal>
+            <Dependent Role="Recipe">
+              <PropertyRef Name="RecipeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Steps_PrepTime">
+          <End Role="PrepTime" Type="Self.PrepTime" Multiplicity="1" />
+          <End Role="Steps" Type="Self.Steps" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PrepTime">
+              <PropertyRef Name="PrepTimeId" />
+            </Principal>
+            <Dependent Role="Steps">
+              <PropertyRef Name="StepsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RecipeModelStoreContainer">
+          <EntitySet Name="CookingTime" EntityType="Self.CookingTime" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ingredient" EntityType="Self.Ingredient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PrepTime" EntityType="Self.PrepTime" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Recipe" EntityType="Self.Recipe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Serves" EntityType="Self.Serves" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Steps" EntityType="Self.Steps" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Ingredient_Recipe" Association="Self.FK_Ingredient_Recipe">
+            <End Role="Recipe" EntitySet="Recipe" />
+            <End Role="Ingredient" EntitySet="Ingredient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PrepTime_CookingTime" Association="Self.FK_PrepTime_CookingTime">
+            <End Role="CookingTime" EntitySet="CookingTime" />
+            <End Role="PrepTime" EntitySet="PrepTime" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recipe_CookingTime" Association="Self.FK_Recipe_CookingTime">
+            <End Role="CookingTime" EntitySet="CookingTime" />
+            <End Role="Recipe" EntitySet="Recipe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recipe_Serves" Association="Self.FK_Recipe_Serves">
+            <End Role="Serves" EntitySet="Serves" />
+            <End Role="Recipe" EntitySet="Recipe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Steps_PrepTime" Association="Self.FK_Steps_PrepTime">
+            <End Role="PrepTime" EntitySet="PrepTime" />
+            <End Role="Steps" EntitySet="Steps" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RecipeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CookingTime">
+          <Key>
+            <PropertyRef Name="CookingTimeId" />
+          </Key>
+          <Property Name="RecipeId" Type="Int32" />
+          <Property Name="CookingTime1" Type="Int32" Nullable="false" />
+          <Property Name="CookingTimeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PrepTime" Relationship="Self.FK_PrepTime_CookingTime" FromRole="CookingTime" ToRole="PrepTime" />
+          <NavigationProperty Name="Recipe" Relationship="Self.FK_Recipe_CookingTime" FromRole="CookingTime" ToRole="Recipe" />
+        </EntityType>
+        <EntityType Name="Ingredient">
+          <Key>
+            <PropertyRef Name="IngredientId" />
+          </Key>
+          <Property Name="RecipeId" Type="Int32" />
+          <Property Name="Ingredient1" Type="String" MaxLength="1000" FixedLength="true" Unicode="true" />
+          <Property Name="IngredientId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Recipe" Relationship="Self.FK_Ingredient_Recipe" FromRole="Ingredient" ToRole="Recipe" />
+        </EntityType>
+        <EntityType Name="PrepTime">
+          <Key>
+            <PropertyRef Name="PrepTimeId" />
+          </Key>
+          <Property Name="PrepTime1" Type="Int32" />
+          <Property Name="PrepTimeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CookingTime" Relationship="Self.FK_PrepTime_CookingTime" FromRole="PrepTime" ToRole="CookingTime" />
+          <NavigationProperty Name="Step" Relationship="Self.FK_Steps_PrepTime" FromRole="PrepTime" ToRole="Steps" />
+        </EntityType>
+        <EntityType Name="Recipe">
+          <Key>
+            <PropertyRef Name="RecipeId" />
+          </Key>
+          <Property Name="RecipeId" Type="Int32" Nullable="false" />
+          <Property Name="RecipeName" Type="String" MaxLength="1000" FixedLength="true" Unicode="true" />
+          <Property Name="CookingTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Serves" Type="Int32" />
+          <Property Name="Ingredient" Type="String" MaxLength="1000" FixedLength="true" Unicode="true" />
+          <Property Name="CookingTimeId" Type="Int32" />
+          <Property Name="ServesId" Type="Int32" />
+          <Property Name="IngredientId" Type="Int32" />
+          <NavigationProperty Name="CookingTime1" Relationship="Self.FK_Recipe_CookingTime" FromRole="Recipe" ToRole="CookingTime" />
+          <NavigationProperty Name="Ingredient1" Relationship="Self.FK_Ingredient_Recipe" FromRole="Recipe" ToRole="Ingredient" />
+          <NavigationProperty Name="Serve" Relationship="Self.FK_Recipe_Serves" FromRole="Recipe" ToRole="Serves" />
+        </EntityType>
+        <EntityType Name="Serve">
+          <Key>
+            <PropertyRef Name="ServesId" />
+          </Key>
+          <Property Name="RecipeId" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="ServesId" Type="Int32" Nullable="false" />
+          <Property Name="Serves" Type="Int32" />
+          <NavigationProperty Name="Recipe" Relationship="Self.FK_Recipe_Serves" FromRole="Serves" ToRole="Recipe" />
+        </EntityType>
+        <EntityType Name="Step">
+          <Key>
+            <PropertyRef Name="StepsId" />
+          </Key>
+          <Property Name="StepsId" Type="Int32" Nullable="false" />
+          <Property Name="Steps" Type="String" MaxLength="1000" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="PrepTime" Relationship="Self.FK_Steps_PrepTime" FromRole="Steps" ToRole="PrepTime" />
+        </EntityType>
+        <Association Name="FK_PrepTime_CookingTime">
+          <End Role="CookingTime" Type="Self.CookingTime" Multiplicity="1" />
+          <End Role="PrepTime" Type="Self.PrepTime" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="CookingTime">
+              <PropertyRef Name="CookingTimeId" />
+            </Principal>
+            <Dependent Role="PrepTime">
+              <PropertyRef Name="PrepTimeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recipe_CookingTime">
+          <End Role="CookingTime" Type="Self.CookingTime" Multiplicity="1" />
+          <End Role="Recipe" Type="Self.Recipe" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="CookingTime">
+              <PropertyRef Name="CookingTimeId" />
+            </Principal>
+            <Dependent Role="Recipe">
+              <PropertyRef Name="RecipeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ingredient_Recipe">
+          <End Role="Recipe" Type="Self.Recipe" Multiplicity="1" />
+          <End Role="Ingredient" Type="Self.Ingredient" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Recipe">
+              <PropertyRef Name="RecipeId" />
+            </Principal>
+            <Dependent Role="Ingredient">
+              <PropertyRef Name="IngredientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Steps_PrepTime">
+          <End Role="PrepTime" Type="Self.PrepTime" Multiplicity="1" />
+          <End Role="Steps" Type="Self.Step" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PrepTime">
+              <PropertyRef Name="PrepTimeId" />
+            </Principal>
+            <Dependent Role="Steps">
+              <PropertyRef Name="StepsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recipe_Serves">
+          <End Role="Serves" Type="Self.Serve" Multiplicity="1" />
+          <End Role="Recipe" Type="Self.Recipe" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Serves">
+              <PropertyRef Name="ServesId" />
+            </Principal>
+            <Dependent Role="Recipe">
+              <PropertyRef Name="RecipeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RecipeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CookingTimes" EntityType="Self.CookingTime" />
+          <EntitySet Name="Ingredients" EntityType="Self.Ingredient" />
+          <EntitySet Name="PrepTimes" EntityType="Self.PrepTime" />
+          <EntitySet Name="Recipes" EntityType="Self.Recipe" />
+          <EntitySet Name="Serves" EntityType="Self.Serve" />
+          <EntitySet Name="Steps" EntityType="Self.Step" />
+          <AssociationSet Name="FK_PrepTime_CookingTime" Association="Self.FK_PrepTime_CookingTime">
+            <End Role="CookingTime" EntitySet="CookingTimes" />
+            <End Role="PrepTime" EntitySet="PrepTimes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recipe_CookingTime" Association="Self.FK_Recipe_CookingTime">
+            <End Role="CookingTime" EntitySet="CookingTimes" />
+            <End Role="Recipe" EntitySet="Recipes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ingredient_Recipe" Association="Self.FK_Ingredient_Recipe">
+            <End Role="Recipe" EntitySet="Recipes" />
+            <End Role="Ingredient" EntitySet="Ingredients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Steps_PrepTime" Association="Self.FK_Steps_PrepTime">
+            <End Role="PrepTime" EntitySet="PrepTimes" />
+            <End Role="Steps" EntitySet="Steps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recipe_Serves" Association="Self.FK_Recipe_Serves">
+            <End Role="Serves" EntitySet="Serves" />
+            <End Role="Recipe" EntitySet="Recipes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RecipeModelStoreContainer" CdmEntityContainer="RecipeEntities">
+          <EntitySetMapping Name="CookingTimes">
+            <EntityTypeMapping TypeName="RecipeModel.CookingTime">
+              <MappingFragment StoreEntitySet="CookingTime">
+                <ScalarProperty Name="RecipeId" ColumnName="RecipeId" />
+                <ScalarProperty Name="CookingTime1" ColumnName="CookingTime" />
+                <ScalarProperty Name="CookingTimeId" ColumnName="CookingTimeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ingredients">
+            <EntityTypeMapping TypeName="RecipeModel.Ingredient">
+              <MappingFragment StoreEntitySet="Ingredient">
+                <ScalarProperty Name="RecipeId" ColumnName="RecipeId" />
+                <ScalarProperty Name="Ingredient1" ColumnName="Ingredient" />
+                <ScalarProperty Name="IngredientId" ColumnName="IngredientId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PrepTimes">
+            <EntityTypeMapping TypeName="RecipeModel.PrepTime">
+              <MappingFragment StoreEntitySet="PrepTime">
+                <ScalarProperty Name="PrepTime1" ColumnName="PrepTime" />
+                <ScalarProperty Name="PrepTimeId" ColumnName="PrepTimeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Recipes">
+            <EntityTypeMapping TypeName="RecipeModel.Recipe">
+              <MappingFragment StoreEntitySet="Recipe">
+                <ScalarProperty Name="RecipeId" ColumnName="RecipeId" />
+                <ScalarProperty Name="RecipeName" ColumnName="RecipeName" />
+                <ScalarProperty Name="CookingTime" ColumnName="CookingTime" />
+                <ScalarProperty Name="Serves" ColumnName="Serves" />
+                <ScalarProperty Name="Ingredient" ColumnName="Ingredient" />
+                <ScalarProperty Name="CookingTimeId" ColumnName="CookingTimeId" />
+                <ScalarProperty Name="ServesId" ColumnName="ServesId" />
+                <ScalarProperty Name="IngredientId" ColumnName="IngredientId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Serves">
+            <EntityTypeMapping TypeName="RecipeModel.Serve">
+              <MappingFragment StoreEntitySet="Serves">
+                <ScalarProperty Name="RecipeId" ColumnName="RecipeId" />
+                <ScalarProperty Name="ServesId" ColumnName="ServesId" />
+                <ScalarProperty Name="Serves" ColumnName="Serves" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Steps">
+            <EntityTypeMapping TypeName="RecipeModel.Step">
+              <MappingFragment StoreEntitySet="Steps">
+                <ScalarProperty Name="StepsId" ColumnName="StepsId" />
+                <ScalarProperty Name="Steps" ColumnName="Steps" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2263f80799c0473c8ef2a66a7595c8ff" Name="Diagram1">
+        <EntityTypeShape EntityType="RecipeModel.CookingTime" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RecipeModel.Ingredient" Width="1.5" PointX="5.25" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RecipeModel.PrepTime" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RecipeModel.Recipe" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RecipeModel.Serve" Width="1.5" PointX="0.75" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RecipeModel.Step" Width="1.5" PointX="5.25" PointY="5.5" IsExpanded="true" />
+        <AssociationConnector Association="RecipeModel.FK_PrepTime_CookingTime" ManuallyRouted="false" />
+        <AssociationConnector Association="RecipeModel.FK_Recipe_CookingTime" ManuallyRouted="false" />
+        <AssociationConnector Association="RecipeModel.FK_Ingredient_Recipe" ManuallyRouted="false" />
+        <AssociationConnector Association="RecipeModel.FK_Steps_PrepTime" ManuallyRouted="false" />
+        <AssociationConnector Association="RecipeModel.FK_Recipe_Serves" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
