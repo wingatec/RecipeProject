@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RecipeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CookingTime">
+    <Key>
+      <PropertyRef Name="CookingTimeId" />
+    </Key>
+    <Property Name="RecipeId" Type="int" />
+    <Property Name="CookingTime" Type="int" Nullable="false" />
+    <Property Name="CookingTimeId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Ingredient">
+    <Key>
+      <PropertyRef Name="IngredientId" />
+    </Key>
+    <Property Name="RecipeId" Type="int" />
+    <Property Name="Ingredient" Type="nchar" MaxLength="1000" />
+    <Property Name="IngredientId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PrepTime">
+    <Key>
+      <PropertyRef Name="PrepTimeId" />
+    </Key>
+    <Property Name="PrepTime" Type="int" />
+    <Property Name="PrepTimeId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Recipe">
+    <Key>
+      <PropertyRef Name="RecipeId" />
+    </Key>
+    <Property Name="RecipeId" Type="int" Nullable="false" />
+    <Property Name="RecipeName" Type="nchar" MaxLength="1000" />
+    <Property Name="CookingTime" Type="time" Precision="7" Nullable="false" />
+    <Property Name="Serves" Type="int" />
+    <Property Name="Ingredient" Type="nchar" MaxLength="1000" />
+    <Property Name="CookingTimeId" Type="int" />
+    <Property Name="ServesId" Type="int" />
+    <Property Name="IngredientId" Type="int" />
+  </EntityType>
+  <EntityType Name="Serves">
+    <Key>
+      <PropertyRef Name="ServesId" />
+    </Key>
+    <Property Name="RecipeId" Type="nchar" MaxLength="10" />
+    <Property Name="ServesId" Type="int" Nullable="false" />
+    <Property Name="Serves" Type="int" />
+  </EntityType>
+  <EntityType Name="Steps">
+    <Key>
+      <PropertyRef Name="StepsId" />
+    </Key>
+    <Property Name="StepsId" Type="int" Nullable="false" />
+    <Property Name="Steps" Type="nchar" MaxLength="1000" />
+  </EntityType>
+  <Association Name="FK_Ingredient_Recipe">
+    <End Role="Recipe" Type="Self.Recipe" Multiplicity="1" />
+    <End Role="Ingredient" Type="Self.Ingredient" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Recipe">
+        <PropertyRef Name="RecipeId" />
+      </Principal>
+      <Dependent Role="Ingredient">
+        <PropertyRef Name="IngredientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PrepTime_CookingTime">
+    <End Role="CookingTime" Type="Self.CookingTime" Multiplicity="1" />
+    <End Role="PrepTime" Type="Self.PrepTime" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="CookingTime">
+        <PropertyRef Name="CookingTimeId" />
+      </Principal>
+      <Dependent Role="PrepTime">
+        <PropertyRef Name="PrepTimeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Recipe_CookingTime">
+    <End Role="CookingTime" Type="Self.CookingTime" Multiplicity="1" />
+    <End Role="Recipe" Type="Self.Recipe" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="CookingTime">
+        <PropertyRef Name="CookingTimeId" />
+      </Principal>
+      <Dependent Role="Recipe">
+        <PropertyRef Name="RecipeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Recipe_Serves">
+    <End Role="Serves" Type="Self.Serves" Multiplicity="1" />
+    <End Role="Recipe" Type="Self.Recipe" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Serves">
+        <PropertyRef Name="ServesId" />
+      </Principal>
+      <Dependent Role="Recipe">
+        <PropertyRef Name="RecipeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Steps_PrepTime">
+    <End Role="PrepTime" Type="Self.PrepTime" Multiplicity="1" />
+    <End Role="Steps" Type="Self.Steps" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="PrepTime">
+        <PropertyRef Name="PrepTimeId" />
+      </Principal>
+      <Dependent Role="Steps">
+        <PropertyRef Name="StepsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="RecipeModelStoreContainer">
+    <EntitySet Name="CookingTime" EntityType="Self.CookingTime" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ingredient" EntityType="Self.Ingredient" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PrepTime" EntityType="Self.PrepTime" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Recipe" EntityType="Self.Recipe" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Serves" EntityType="Self.Serves" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Steps" EntityType="Self.Steps" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Ingredient_Recipe" Association="Self.FK_Ingredient_Recipe">
+      <End Role="Recipe" EntitySet="Recipe" />
+      <End Role="Ingredient" EntitySet="Ingredient" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PrepTime_CookingTime" Association="Self.FK_PrepTime_CookingTime">
+      <End Role="CookingTime" EntitySet="CookingTime" />
+      <End Role="PrepTime" EntitySet="PrepTime" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Recipe_CookingTime" Association="Self.FK_Recipe_CookingTime">
+      <End Role="CookingTime" EntitySet="CookingTime" />
+      <End Role="Recipe" EntitySet="Recipe" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Recipe_Serves" Association="Self.FK_Recipe_Serves">
+      <End Role="Serves" EntitySet="Serves" />
+      <End Role="Recipe" EntitySet="Recipe" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Steps_PrepTime" Association="Self.FK_Steps_PrepTime">
+      <End Role="PrepTime" EntitySet="PrepTime" />
+      <End Role="Steps" EntitySet="Steps" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

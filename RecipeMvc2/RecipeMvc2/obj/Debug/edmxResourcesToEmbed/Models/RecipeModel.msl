@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="RecipeModelStoreContainer" CdmEntityContainer="RecipeEntities">
+    <EntitySetMapping Name="CookingTimes">
+      <EntityTypeMapping TypeName="RecipeModel.CookingTime">
+        <MappingFragment StoreEntitySet="CookingTime">
+          <ScalarProperty Name="RecipeId" ColumnName="RecipeId" />
+          <ScalarProperty Name="CookingTime1" ColumnName="CookingTime" />
+          <ScalarProperty Name="CookingTimeId" ColumnName="CookingTimeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ingredients">
+      <EntityTypeMapping TypeName="RecipeModel.Ingredient">
+        <MappingFragment StoreEntitySet="Ingredient">
+          <ScalarProperty Name="RecipeId" ColumnName="RecipeId" />
+          <ScalarProperty Name="Ingredient1" ColumnName="Ingredient" />
+          <ScalarProperty Name="IngredientId" ColumnName="IngredientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PrepTimes">
+      <EntityTypeMapping TypeName="RecipeModel.PrepTime">
+        <MappingFragment StoreEntitySet="PrepTime">
+          <ScalarProperty Name="PrepTime1" ColumnName="PrepTime" />
+          <ScalarProperty Name="PrepTimeId" ColumnName="PrepTimeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Recipes">
+      <EntityTypeMapping TypeName="RecipeModel.Recipe">
+        <MappingFragment StoreEntitySet="Recipe">
+          <ScalarProperty Name="RecipeId" ColumnName="RecipeId" />
+          <ScalarProperty Name="RecipeName" ColumnName="RecipeName" />
+          <ScalarProperty Name="CookingTime" ColumnName="CookingTime" />
+          <ScalarProperty Name="Serves" ColumnName="Serves" />
+          <ScalarProperty Name="Ingredient" ColumnName="Ingredient" />
+          <ScalarProperty Name="CookingTimeId" ColumnName="CookingTimeId" />
+          <ScalarProperty Name="ServesId" ColumnName="ServesId" />
+          <ScalarProperty Name="IngredientId" ColumnName="IngredientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Serves">
+      <EntityTypeMapping TypeName="RecipeModel.Serve">
+        <MappingFragment StoreEntitySet="Serves">
+          <ScalarProperty Name="RecipeId" ColumnName="RecipeId" />
+          <ScalarProperty Name="ServesId" ColumnName="ServesId" />
+          <ScalarProperty Name="Serves" ColumnName="Serves" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Steps">
+      <EntityTypeMapping TypeName="RecipeModel.Step">
+        <MappingFragment StoreEntitySet="Steps">
+          <ScalarProperty Name="StepsId" ColumnName="StepsId" />
+          <ScalarProperty Name="Steps" ColumnName="Steps" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
